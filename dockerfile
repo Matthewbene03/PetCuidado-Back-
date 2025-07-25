@@ -1,20 +1,24 @@
-# Etapa 1: build
+# Etapa 1: Build com Maven
 FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
-# Copia apenas os arquivos do backend
-COPY PetCuidadoback/PetCuidado/pom.xml /app/
+# Copia apenas os arquivos necessários para resolver dependências
+COPY pom.xml /app/
+COPY src /app/src/
 
-# Compila o projeto (sem rodar os testes)
+# Compila o projeto e gera o .jar (sem rodar os testes)
 RUN mvn clean package -DskipTests
 
-# Etapa 2: runtime
-FROM eclipse-temurin:17-jdk
+# Etapa 2: Runtime com JDK leve
+FROM eclipse-temurin:17-jdk-alpine
 WORKDIR /app
 
-# Copia o JAR da etapa de build
+# Copia o .jar gerado na etapa de build
 COPY --from=build /app/target/*.jar app.jar
 
+# Expõe a porta da aplicação (ajuste se for diferente)
 EXPOSE 8080
 
+# Comando para rodar a aplicação
 ENTRYPOINT ["java", "-jar", "app.jar"]
+
