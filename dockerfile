@@ -3,7 +3,7 @@ FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
 # Copia apenas os arquivos do backend
-COPY PetCuidado(back)/PetCuidado/pom.xml
+COPY PetCuidadoback/PetCuidado/pom.xml /app/
 
 # Compila o projeto (sem rodar os testes)
 RUN mvn clean package -DskipTests
