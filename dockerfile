@@ -1,5 +1,5 @@
 # Etapa 1: Build com Maven
-FROM maven:3.9.6-eclipse-temurin-17 AS build
+FROM maven:3.9.6-eclipse-temurin-21 AS build
 WORKDIR /app
 
 # Copia apenas os arquivos necessários para resolver dependências
@@ -10,7 +10,7 @@ COPY PetCuidadoback/PetCuidado/src /app/src/
 RUN mvn clean package -DskipTests
 
 # Etapa 2: Runtime com JDK leve
-FROM eclipse-temurin:17-jdk-alpine
+FROM eclipse-temurin:21-jdk
 WORKDIR /app
 
 # Copia o .jar gerado na etapa de build
