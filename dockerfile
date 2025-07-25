@@ -3,8 +3,8 @@ FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
 
 # Copia apenas os arquivos necessários para resolver dependências
-COPY pom.xml /app/
-COPY src /app/src/
+COPY PetCuidadoback/PetCuidado/pom.xml /app/
+COPY PetCuidadoback/PetCuidado/src /app/src/
 
 # Compila o projeto e gera o .jar (sem rodar os testes)
 RUN mvn clean package -DskipTests
