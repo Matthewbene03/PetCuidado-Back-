@@ -13,7 +13,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**") // aplica a todos os endpoints
-                        .allowedOrigins("http://localhost:4200") // permite o frontend acessar
+                .allowedOrigins("http://localhost:4200", "https://p3tcuidado.netlify.app") // permite o frontend acessar
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
