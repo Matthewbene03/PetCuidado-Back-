@@ -1,8 +1,10 @@
 package com.petCuidado.PetCuidado.entities;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import com.petCuidado.PetCuidado.enuns.Metodo;
+import com.petCuidado.PetCuidado.enuns.Status;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -22,16 +24,19 @@ public class Pagamento {
 	private long id;
 	
 	@Column(nullable = false)
-	private String dataVencimento;
+	private LocalDateTime dataVencimento;
 	
 	@Column(nullable = true)
-	private String dataPagamento;
+	private LocalDateTime dataPagamento;
 	
 	@Column(nullable = true)
 	private float valor;
 	
 	@Column(nullable = true)
 	private Metodo metodo;
+	
+	@Column(nullable = true)
+	private Status status;	
 	
 	@ManyToOne
 	@JoinColumn(name = "id_agendamento", nullable = false)
@@ -41,13 +46,14 @@ public class Pagamento {
 		
 	}
 	
-	public Pagamento(long id, String dataVencimento, String dataPagamento, float valor, Metodo metodo, Agendamento agendamento) {
+	public Pagamento(long id, LocalDateTime dataVencimento, LocalDateTime dataPagamento, float valor, Metodo metodo, Agendamento agendamento, Status status) {
 		this.id = id;
 		this.dataVencimento = dataVencimento;
 		this.dataPagamento = dataPagamento;
 		this.valor = valor;
 		this.metodo = metodo;
 		this.agendamento = agendamento;
+		this.status = status;
 	}
 
 	public long getId() {
@@ -58,19 +64,19 @@ public class Pagamento {
 		this.id = id;
 	}
 
-	public String getDataVencimento() {
+	public LocalDateTime getDataVencimento() {
 		return dataVencimento;
 	}
 
-	public void setDataVencimento(String dataVencimento) {
+	public void setDataVencimento(LocalDateTime dataVencimento) {
 		this.dataVencimento = dataVencimento;
 	}
 
-	public String getDataPagamento() {
+	public LocalDateTime getDataPagamento() {
 		return dataPagamento;
 	}
 
-	public void setDataPagamento(String dataPagamento) {
+	public void setDataPagamento(LocalDateTime dataPagamento) {
 		this.dataPagamento = dataPagamento;
 	}
 
@@ -98,9 +104,17 @@ public class Pagamento {
 		this.agendamento = agendamento;
 	}
 
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(agendamento, dataPagamento, dataVencimento, id, metodo, valor);
+		return Objects.hash(agendamento, dataPagamento, dataVencimento, id, metodo, status, valor);
 	}
 
 	@Override
@@ -114,7 +128,7 @@ public class Pagamento {
 		Pagamento other = (Pagamento) obj;
 		return Objects.equals(agendamento, other.agendamento) && Objects.equals(dataPagamento, other.dataPagamento)
 				&& Objects.equals(dataVencimento, other.dataVencimento) && id == other.id && metodo == other.metodo
+				&& Objects.equals(status, other.status)
 				&& Float.floatToIntBits(valor) == Float.floatToIntBits(other.valor);
 	}
-	
 }

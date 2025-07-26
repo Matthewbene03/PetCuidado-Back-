@@ -38,6 +38,7 @@ public class PagamentoService {
 			pagamento.setValor(pagamentoDTO.getValor());
 			pagamento.setMetodo(pagamentoDTO.getMetodo());
 			pagamento.setAgendamento(pagamentoDTO.getAgendamento());
+			pagamento.setStatus(pagamentoDTO.getStatus());
 			Pagamento pagamentoSalvo = pagamentoRepository.save(pagamento); 
 			return new PagamentoDTO(pagamentoSalvo); 
 		}
@@ -51,6 +52,7 @@ public class PagamentoService {
 			pagamento.setValor(pagamentoDTO.getValor());
 			pagamento.setMetodo(pagamentoDTO.getMetodo());
 			pagamento.setAgendamento(pagamentoDTO.getAgendamento());
+			pagamento.setStatus(pagamentoDTO.getStatus());
 			Pagamento pagamentoAtualizado = pagamentoRepository.save(pagamento); 
 			return new PagamentoDTO(pagamentoAtualizado); 
 		}
